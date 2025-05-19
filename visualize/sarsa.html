@@ -1,0 +1,127 @@
+<div class="container">
+  <h2>🔁 What is SARSA?</h2>
+  <p>
+    <strong>SARSA (State-Action-Reward-State-Action)</strong> is an on-policy reinforcement learning algorithm.  
+    It learns the action-value function based on the action actually taken by the current policy, not the optimal future action like in Q-learning.  
+    This makes SARSA more conservative in updating Q-values because it considers the current policy's behavior during training.
+  </p>
+
+  <h2>📌 Core Idea</h2>
+  <p>
+    The SARSA algorithm updates Q-values based on the quintuple: <code>(s, a, r, s', a')</code>, where:
+    <ul>
+      <li><strong>s</strong>: current state</li>
+      <li><strong>a</strong>: action taken</li>
+      <li><strong>r</strong>: reward received</li>
+      <li><strong>s'</strong>: next state</li>
+      <li><strong>a'</strong>: next action selected (following the current policy)</li>
+    </ul>
+  </p>
+
+  <h2>🧮 SARSA Update Formula</h2>
+  <div class="formula-box">
+    <p><strong>Q(s, a) ← Q(s, a) + α [R + γ Q(s′, a′) − Q(s, a)]</strong></p>
+  </div>
+  <p>
+    <strong>Where:</strong><br>
+    <ul>
+      <li><strong>α</strong>: Learning rate</li>
+      <li><strong>γ</strong>: Discount factor</li>
+      <li><strong>R</strong>: Reward received for action <code>a</code> in state <code>s</code></li>
+      <li><strong>Q(s′, a′)</strong>: Q-value of next state and next action</li>
+    </ul>
+  </p>
+
+  <h2>📊 SARSA vs Q-Learning</h2>
+  <ul>
+    <li><strong>Q-Learning:</strong> Off-policy → uses the best possible action for the next state</li>
+    <li><strong>SARSA:</strong> On-policy → uses the actual action taken according to the current policy (e.g., ε-greedy)</li>
+    <li><strong>Q-Learning:</strong> More aggressive, may overestimate</li>
+    <li><strong>SARSA:</strong> More conservative, follows agent’s exploration pattern</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li>Autonomous robot control</li>
+    <li>Navigation in stochastic environments</li>
+    <li>Video game AI (with exploration-based behavior)</li>
+    <li>Dialogue systems and chatbots (with policy learning)</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/sarsa.png" alt="SARSA RL visualization">
+    <p><em>Agent learns from actual actions taken under the current policy rather than theoretical best actions.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>On-policy learning respects the agent’s behavior during training</li>
+    <li>Less prone to overestimation than Q-Learning</li>
+    <li>Works well in environments with stochastic transitions</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>May converge more slowly than Q-learning</li>
+    <li>Performance highly depends on the quality of the policy being followed</li>
+    <li>Needs careful tuning of ε (exploration rate)</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .formula-box {
+    text-align: center;
+    margin: 20px 0;
+    background-color: #f1f8ff;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

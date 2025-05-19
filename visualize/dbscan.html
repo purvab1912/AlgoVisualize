@@ -1,0 +1,94 @@
+<div class="container">
+  <h2>🔍 What is DBSCAN?</h2>
+  <p>
+    <strong>DBSCAN</strong> is an unsupervised, density-based clustering algorithm that discovers clusters of
+    arbitrary shape and identifies noise (outliers).  
+    Unlike K-Means, it does <em>not</em> require you to specify the number of clusters in advance.
+  </p>
+
+  <h2>⚙️ Key Parameters</h2>
+  <ul>
+    <li><strong>ε (epsilon):</strong> Radius that defines a point’s neighborhood.</li>
+    <li><strong>minPts:</strong> Minimum number of points required to form a dense region (core point).</li>
+  </ul>
+
+  <h2>🪜 How DBSCAN Works (High-Level)</h2>
+  <ol>
+    <li>Pick an unvisited point.</li>
+    <li>Retrieve all neighbors within <code>ε</code>.</li>
+    <li>
+      <strong>If</strong> the point has ≥&nbsp;<code>minPts</code> neighbors → start a new cluster  
+      &nbsp;&nbsp;&bull; Mark point as a <em>core point</em>  
+      &nbsp;&nbsp;&bull; Recursively add reachable neighbors
+    </li>
+    <li><strong>Else</strong> mark the point as <em>noise</em> (may later become a border point).</li>
+    <li>Repeat until every point has been visited.</li>
+  </ol>
+
+  <h2>🖼️ DBSCAN Visualization</h2>
+  <div class="image-box">
+    <!-- Replace with your PNG path or URL -->
+    <img src="../images/dbscan.png" alt="DBSCAN Example">
+    <p><em>Clusters of arbitrary shape with noise points (gray)</em></p>
+  </div>
+
+  <h2>📊 Typical Applications</h2>
+  <ul>
+    <li>Anomaly or fraud detection</li>
+    <li>Geospatial clustering (e.g., grouping GPS coordinates)</li>
+    <li>Image segmentation based on pixel density</li>
+    <li>Customer behavior pattern discovery</li>
+  </ul>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Finds clusters of <em>arbitrary shape</em></li>
+    <li>Automatically detects noise and outliers</li>
+    <li>No need to pre-set number of clusters</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Parameter choice (<code>ε</code>, <code>minPts</code>) can be tricky</li>
+    <li>Struggles with clusters of varying densities</li>
+    <li>Performance degrades in very high-dimensional spaces</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 28px;
+  }
+
+  p, li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin-left: 22px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+</style>

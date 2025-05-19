@@ -1,0 +1,96 @@
+<div class="container">
+  <h2>🧩 What is Semi-Supervised SVM?</h2>
+  <p>
+    Semi-Supervised Support Vector Machine (S3VM) is an extension of the classic Support Vector Machine (SVM) that leverages both labeled and unlabeled data to improve classification performance.  
+    While traditional SVMs are supervised and use only labeled data, S3VMs utilize the unlabeled data to find a decision boundary that not only separates the labeled samples well but also avoids cutting through dense regions of the data distribution.
+  </p>
+
+  <h2>📚 Detailed Concept</h2>
+  <p>
+    S3VM tries to find a decision boundary with a large margin (like regular SVM) but also incorporates the unlabeled data by encouraging the boundary to lie in low-density regions, reflecting the cluster assumption: data points in the same cluster are likely to share the same label.  
+    This makes the classifier more robust and accurate when labeled data is limited but unlabeled data is plentiful.
+  </p>
+
+  <h2>🛠️ Types of Semi-Supervised SVM</h2>
+  <ul>
+    <li><strong>Transductive SVM (TSVM):</strong> Directly finds the decision boundary that maximizes margin on labeled and unlabeled data simultaneously. It is a common approach but computationally expensive.</li>
+    <li><strong>Graph-based SVM:</strong> Combines SVM with graph-based regularization to incorporate similarity between samples.</li>
+    <li><strong>Entropy Regularized SVM:</strong> Adds an entropy term to encourage confident predictions on unlabeled data.</li>
+    <li><strong>Co-Training SVM:</strong> Uses multiple SVMs trained on different feature views, applying co-training principles to leverage unlabeled data.</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li>Text classification where only some documents are labeled.</li>
+    <li>Image recognition with scarce labeled images.</li>
+    <li>Bioinformatics for gene or protein function prediction.</li>
+    <li>Speech and audio classification with limited annotations.</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/s3vm.png" alt="Semi-Supervised SVM visualization">
+    <p><em>Visualization: The decision boundary (line) separates labeled points, and unlabeled points influence the margin to avoid cutting dense data regions.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Improves generalization by leveraging unlabeled data.</li>
+    <li>Maintains the robust margin maximization principle of SVM.</li>
+    <li>Works well in scenarios with scarce labeled data but abundant unlabeled data.</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Training is often computationally intensive due to complex optimization.</li>
+    <li>Performance depends on the quality and distribution of unlabeled data.</li>
+    <li>Choice of parameters and kernel functions becomes more critical.</li>
+    <li>Can be sensitive to noisy or incorrectly labeled data.</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

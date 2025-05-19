@@ -1,0 +1,97 @@
+<div class="container">
+  <h2>🌐 What is Graph-Based Semi-Supervised Learning?</h2>
+  <p>
+    Graph-Based Semi-Supervised Learning is a class of algorithms that use graph structures to represent the relationships or similarities between data points, both labeled and unlabeled.  
+    The idea is to propagate label information smoothly over the graph, assuming that connected or similar nodes are likely to share the same label.
+  </p>
+
+  <h2>📚 Detailed Concept</h2>
+  <p>
+    In graph-based methods, data points are represented as nodes in a graph, and edges indicate similarity or affinity between points (often weighted by a similarity function).  
+    The label information is propagated from labeled nodes to unlabeled ones through edges, often by minimizing an energy function that enforces label smoothness on the graph.  
+    This leverages the geometric structure of data and the cluster assumption: points in the same cluster tend to have the same label.
+  </p>
+
+  <h2>🛠️ Types of Graph-Based Semi-Supervised Learning</h2>
+  <ul>
+    <li><strong>Label Propagation:</strong> Labels are spread iteratively from labeled nodes to unlabeled nodes based on graph connectivity until convergence.</li>
+    <li><strong>Label Spreading:</strong> Similar to label propagation but with normalization to ensure stability and better handling of noisy labels.</li>
+    <li><strong>Graph Regularization Methods:</strong> Combine supervised loss with a smoothness term on the graph Laplacian to encourage similar nodes to have similar labels.</li>
+    <li><strong>Manifold Regularization:</strong> Extends graph regularization by incorporating manifold assumptions in the learning process, improving generalization.</li>
+    <li><strong>Graph Neural Networks (GNNs):</strong> Use neural networks to learn node embeddings that capture graph structure and labels, enabling semi-supervised learning in complex graphs.</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li>Social network analysis for community detection and influence prediction.</li>
+    <li>Image and video segmentation where pixels or regions are nodes in a graph.</li>
+    <li>Recommendation systems using user-item interaction graphs.</li>
+    <li>Bioinformatics for predicting protein functions or gene interactions.</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/Screenshot 2025-05-18 193652.png" alt="Graph-Based Semi-Supervised Learning visualization">
+    <p><em>Graph representation where labels propagate smoothly from labeled nodes to unlabeled nodes via weighted edges.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Effectively exploits the underlying data geometry and relationships.</li>
+    <li>Can handle complex data distributions that are not easily separable.</li>
+    <li>Leverages both labeled and abundant unlabeled data efficiently.</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Construction of a meaningful graph and choice of similarity measures are critical and can be challenging.</li>
+    <li>Scalability can be an issue for very large datasets due to graph size.</li>
+    <li>Performance sensitive to noisy or incorrect edges in the graph.</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

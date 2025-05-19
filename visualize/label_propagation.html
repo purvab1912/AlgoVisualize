@@ -1,0 +1,95 @@
+<div class="container">
+  <h2>🔖 What is Label Propagation?</h2>
+  <p>
+    Label Propagation is a graph-based semi-supervised learning algorithm that spreads labels from a small set of labeled data points to a large set of unlabeled data points using the structure of the data.  
+    It works by treating data as nodes in a graph, where edges represent similarities between points. Labels “propagate” through the graph iteratively until convergence.
+  </p>
+
+  <h2>📚 Detailed Concept</h2>
+  <p>
+    The algorithm constructs a graph with nodes representing samples and weighted edges representing similarities (e.g., distance or kernel functions). Initially, only a few nodes have known labels.  
+    Label propagation iteratively updates the labels of unlabeled nodes based on their neighbors’ labels, smoothing the label information across the graph. Eventually, each node’s label stabilizes, effectively assigning labels to previously unlabeled data.
+  </p>
+
+  <h2>🧩 Uses of Label Propagation</h2>
+  <ul>
+    <li>Classifying data with very few labeled examples.</li>
+    <li>Exploiting the data manifold or similarity structure in semi-supervised tasks.</li>
+    <li>Clustering and community detection in graphs.</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li><strong>Social Networks:</strong> Detecting communities and spreading information.</li>
+    <li><strong>Image Segmentation:</strong> Propagating pixel labels in computer vision.</li>
+    <li><strong>Recommender Systems:</strong> Predicting preferences based on similarity graphs.</li>
+    <li><strong>Bioinformatics:</strong> Labeling gene expressions or protein functions.</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/label.png" alt="Label Propagation graph visualization">
+    <p><em>Visualization of label propagation: labels spread iteratively from labeled nodes (colored) through the graph edges to unlabeled nodes.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Simple and intuitive graph-based method.</li>
+    <li>Effectively uses data similarity structure.</li>
+    <li>Does not require complex models or heavy computation.</li>
+    <li>Works well when data lies on low-dimensional manifolds.</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Performance depends heavily on the quality of the graph and similarity metric.</li>
+    <li>Can propagate incorrect labels if initial labeled points are noisy or insufficient.</li>
+    <li>Not scalable to extremely large datasets without optimization.</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

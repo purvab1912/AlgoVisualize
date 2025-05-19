@@ -1,0 +1,91 @@
+<div class="container">
+  <h2>🌲 What is Hierarchical Clustering?</h2>
+  <p>
+    Hierarchical Clustering is an <strong>unsupervised learning algorithm</strong> used to group similar data points into clusters. Unlike K-Means, it does not require specifying the number of clusters beforehand. It creates a tree-like structure of nested clusters known as a <strong>dendrogram</strong>.
+  </p>
+
+  <h2>🧠 Types of Hierarchical Clustering</h2>
+  <ul>
+    <li><strong>Agglomerative (Bottom-Up):</strong> Starts with individual points and merges the closest clusters step-by-step.</li>
+    <li><strong>Divisive (Top-Down):</strong> Starts with one cluster and splits it recursively.</li>
+  </ul>
+
+  <h2>🪜 How It Works (Agglomerative)</h2>
+  <ol>
+    <li>Start with each point as its own cluster</li>
+    <li>Find the two closest clusters and merge them</li>
+    <li>Update the distance matrix</li>
+    <li>Repeat until only one cluster remains</li>
+  </ol>
+
+  <h2>📉 Dendrogram</h2>
+  <p>
+    A <strong>dendrogram</strong> is a tree diagram that shows the hierarchy of merges. You can "cut" the dendrogram at a desired level to choose the number of clusters.
+  </p>
+
+  <div class="image-box">
+    <!-- Replace with your actual image path -->
+    <img src="../images/hierarchial.png" alt="Hierarchical Clustering Dendrogram">
+    <p><em>Example dendrogram showing hierarchical cluster formation</em></p>
+  </div>
+
+  <h2>🧪 Applications</h2>
+  <ul>
+    <li>Gene expression analysis (bioinformatics)</li>
+    <li>Social network analysis</li>
+    <li>Document and text classification</li>
+    <li>Market segmentation</li>
+  </ul>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>No need to pre-specify the number of clusters</li>
+    <li>Produces interpretable tree-like structure</li>
+    <li>Works with different types of distance metrics</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Computationally expensive (especially for large datasets)</li>
+    <li>Once merged or split, operations cannot be undone</li>
+    <li>Not robust to noise and outliers</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 30px;
+  }
+
+  p, li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+</style>

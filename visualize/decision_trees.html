@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Understanding Decision Trees</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    header {
+      background: #1abc9c;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1.1em;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background: #1abc9c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Understanding Decision Trees</h1>
+    <p>Simple and powerful models that mimic human decision-making</p>
+  </header>
+
+  <div class="container">
+    <h2>🌳 What is a Decision Tree?</h2>
+    <p>
+      A decision tree is a flowchart-like tree structure used for both classification and regression tasks.
+      It makes decisions based on feature values and splits data recursively until a prediction is made.
+    </p>
+
+    <h2>✅ Common Applications</h2>
+    <ul>
+      <li>Medical diagnosis (e.g., predicting disease based on symptoms)</li>
+      <li>Credit scoring and risk analysis</li>
+      <li>Customer segmentation and targeting</li>
+      <li>Loan approval systems</li>
+      <li>Business decision modeling</li>
+    </ul>
+
+    <h2>🌲 Types of Decision Trees</h2>
+    <ul>
+      <li><strong>Classification Tree</strong>: Used when the target is categorical (e.g., "Yes" or "No")</li>
+      <li><strong>Regression Tree</strong>: Used when the target is numerical (e.g., price or age)</li>
+    </ul>
+
+    <h2>⚙️ How a Decision Tree Works</h2>
+    <p>
+      The tree starts from a root node and splits data at decision nodes based on feature values.
+      It continues splitting until it reaches a leaf node, which holds the final prediction.
+    </p>
+    <p>Key concepts used to split nodes:</p>
+    <ul>
+      <li><strong>Gini Impurity</strong>: Measures how often a randomly chosen element would be incorrectly labeled</li>
+      <li><strong>Entropy</strong>: Measures information gain (used in ID3 algorithm)</li>
+      <li><strong>Information Gain</strong>: Gain in purity after a split</li>
+    </ul>
+
+    <h3>🎯 Example</h3>
+    <p>
+      Suppose you're building a model to decide if someone will buy a product based on:
+      <ul>
+        <li>Age</li>
+        <li>Income</li>
+        <li>Marital status</li>
+      </ul>
+    </p>
+    <p>
+      The decision tree may look like:
+      <br><code>Is Age > 30?</code> → <code>Yes</code>: Check Income → <code>High?</code> → Buy<br>
+      → <code>No</code>: Don’t Buy
+    </p>
+
+    <div class="image-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/CART_tree_titanic_survivors.png" alt="Decision Tree Diagram">
+      <p><em>Example of a decision tree (Titanic survival prediction)</em></p>
+    </div>
+
+    <h2>🧠 Advantages</h2>
+    <ul>
+      <li>Easy to understand and visualize</li>
+      <li>Can handle both numerical and categorical data</li>
+      <li>Requires little data preprocessing</li>
+    </ul>
+
+    <h2>⚠️ Limitations</h2>
+    <ul>
+      <li>Can overfit the data if not pruned</li>
+      <li>Sensitive to small changes in data</li>
+      <li>Can become complex with many branches</li>
+    </ul>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Decision Tree Educational Page | Built with HTML + CSS
+  </footer>
+
+</body>
+</html>

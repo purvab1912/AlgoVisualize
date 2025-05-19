@@ -1,0 +1,86 @@
+<div class="container">
+  <h2>🤖 What is an Autoencoder?</h2>
+  <p>
+    An <strong>Autoencoder</strong> is an unsupervised artificial neural network used to learn efficient data encodings.  
+    It compresses the input into a lower-dimensional representation (called the <em>bottleneck</em>) and then reconstructs the original input from this compressed form.
+  </p>
+
+  <h2>🔧 How Autoencoders Work</h2>
+  <p>
+    The network consists of two parts:
+  </p>
+  <ul>
+    <li><strong>Encoder:</strong> Compresses the input data into a smaller latent space.</li>
+    <li><strong>Decoder:</strong> Reconstructs the original data from the compressed encoding.</li>
+  </ul>
+  <p>
+    The goal is to minimize the difference between the input and the reconstructed output.
+  </p>
+
+  <h2>📉 Basic Autoencoder Architecture</h2>
+  <div class="image-box">
+    <img src="../images/autoencoders1.png" alt="Autoencoder">
+    <p><em>Simple autoencoder: Encoder compresses input, decoder reconstructs output</em></p>
+  </div>
+
+  <h2>🧪 Common Applications</h2>
+  <ul>
+    <li>Dimensionality reduction</li>
+    <li>Data denoising</li>
+    <li>Anomaly detection</li>
+    <li>Image compression and reconstruction</li>
+    <li>Generating new data samples (variational autoencoders)</li>
+  </ul>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Can learn non-linear dimensionality reduction</li>
+    <li>Unsupervised learning (no labels needed)</li>
+    <li>Flexible architecture for various data types</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Requires careful tuning and sufficient data</li>
+    <li>May overfit without regularization</li>
+    <li>Interpretability of latent space is often difficult</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 30px;
+  }
+
+  p, li {
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+  }
+</style>

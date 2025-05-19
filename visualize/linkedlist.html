@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linked List Visualization</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f0f8ff;
+      color: #1e3a5f;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      background-color: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.1);
+    }
+
+    .description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    select, input, button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    select, input {
+      background-color: #d4e8f9;
+      color: #1e3a5f;
+      min-width: 140px;
+    }
+
+    button {
+      background-color: #a4c9e9;
+      color: #1e3a5f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #8eb8e3;
+    }
+
+    .list-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 20px;
+      background-color: #eaf4fb;
+      border-radius: 12px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #b2d7f7;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 60px;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+
+    .node.highlight {
+      background-color: #7fbff5;
+    }
+
+    .arrow {
+      font-size: 20px;
+      margin: 0 10px;
+    }
+
+    .double-arrow::before {
+      content: '<->';
+      color: #1e3a5f;
+    }
+
+    .single-arrow::before {
+      content: '→';
+      color: #1e3a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Linked List Visualization</h1>
+
+    <div class="description">
+      <p>A <strong>linked list</strong> is a linear data structure where each element (node) contains a value and a reference to the next (and optionally previous) node.</p>
+      <p>Supported operations:</p>
+      <ul>
+        <li><strong>Insert</strong> – Add a node at a specific position</li>
+        <li><strong>Delete</strong> – Remove a node by position</li>
+        <li><strong>Search</strong> – Highlight a node with the specified value</li>
+        <li><strong>Update</strong> – Change the value of a node at a specific position</li>
+      </ul>
+    </div>
+
+    <div class="controls">
+      <select id="listType">
+        <option value="singly">Singly Linked List</option>
+        <option value="doubly">Doubly Linked List</option>
+      </select>
+      <select id="operation" onchange="updateFields()">
+        <option value="" disabled selected>Select Operation</option>
+        <option value="insert">Insert</option>
+        <option value="delete">Delete</option>
+        <option value="search">Search</option>
+        <option value="update">Update</option>
+      </select>
+      <input type="number" id="valueInput" placeholder="Value" style="display: none;" />
+      <input type="number" id="positionInput" placeholder="Position" style="display: none;" />
+      <button onclick="performOperation()">Visualize</button>
+    </div>
+
+    <div class="list-container" id="listContainer"></div>
+  </div>
+
+  <script>
+    let linkedList = [];
+
+    function updateFields() {
+      const op = document.getElementById('operation').value;
+      document.getElementById('valueInput').style.display = 'none';
+      document.getElementById('positionInput').style.display = 'none';
+
+      if (op === 'insert' || op === 'update') {
+        document.getElementById('valueInput').style.display = 'inline-block';
+        document.getElementById('positionInput').style.display = 'inline-block';
+      } else if (op === 'delete') {
+        document.getElementById('positionInput').style.display = 'inline-block';
+      } else if (op === 'search') {
+        document.getElementById('valueInput').style.display = 'inline-block';
+      }
+    }
+
+    function renderList() {
+      const container = document.getElementById('listContainer');
+      const listType = document.getElementById('listType').value;
+      container.innerHTML = '';
+
+      linkedList.forEach((val, i) => {
+        const node = document.createElement('div');
+        node.className = 'node';
+        node.innerText = val;
+
+        container.appendChild(node);
+
+        if (i < linkedList.length - 1) {
+          const arrow = document.createElement('div');
+          arrow.className = 'arrow ' + (listType === 'doubly' ? 'double-arrow' : 'single-arrow');
+          container.appendChild(arrow);
+        }
+      });
+    }
+
+    function performOperation() {
+      const operation = document.getElementById('operation').value;
+      const value = parseInt(document.getElementById('valueInput').value);
+      const position = parseInt(document.getElementById('positionInput').value);
+
+      switch (operation) {
+        case 'insert':
+          if (isNaN(value) || isNaN(position) || position < 0 || position > linkedList.length) {
+            alert('Enter valid value and position.');
+            return;
+          }
+          linkedList.splice(position, 0, value);
+          break;
+
+        case 'delete':
+          if (isNaN(position) || position < 0 || position >= linkedList.length) {
+            alert('Enter valid position.');
+            return;
+          }
+          linkedList.splice(position, 1);
+          break;
+
+        case 'search':
+          if (isNaN(value)) {
+            alert('Enter a value to search.');
+            return;
+          }
+          renderList();
+          highlightNode(value);
+          return;
+
+        case 'update':
+          if (isNaN(value) || isNaN(position) || position < 0 || position >= linkedList.length) {
+            alert('Enter valid value and position.');
+            return;
+          }
+          linkedList[position] = value;
+          break;
+
+        default:
+          alert('Select an operation.');
+          return;
+      }
+
+      renderList();
+    }
+
+    function highlightNode(value) {
+      const nodes = document.querySelectorAll('.node');
+      let found = false;
+      nodes.forEach(node => {
+        if (parseInt(node.innerText) === value) {
+          node.classList.add('highlight');
+          found = true;
+        }
+      });
+      if (!found) alert('Value not found.');
+    }
+
+    // Initialize with some nodes
+    linkedList = [10, 20, 30];
+    renderList();
+  </script>
+</body>
+</html>

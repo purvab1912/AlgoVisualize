@@ -1,0 +1,22 @@
+<!-- Add this in dashboard.html -->
+<div>
+  <h2>AI Chat Assistant</h2>
+  <input type="text" id="userInput" placeholder="Ask me anything..." />
+  <button onclick="sendMessage()">Send</button>
+  <div id="chatResponse"></div>
+</div>
+
+<script>
+function sendMessage() {
+  const message = document.getElementById('userInput').value;
+  fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('chatResponse').innerText = data.reply;
+  });
+}
+</script>

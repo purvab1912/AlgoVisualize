@@ -1,0 +1,153 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Understanding Linear Regression</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1.1em;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <div class="container">
+    <h1>📈 Linear Regression Visualizer</h1>
+    <h2>📌 What is Linear Regression?</h2>
+    <p>
+      Linear Regression is a supervised machine learning algorithm used to model the relationship between a dependent variable (target) and one or more independent variables (features) by fitting a linear equation to the observed data.
+    </p>
+
+    <h2>✅ Uses of Linear Regression</h2>
+    <ul>
+      <li>Predicting housing prices based on area, number of rooms, etc.</li>
+      <li>Estimating sales based on advertising spend</li>
+      <li>Forecasting stock or commodity prices</li>
+      <li>Predicting health outcomes (e.g., blood pressure based on age, weight)</li>
+      <li>Modeling trends in economics or finance</li>
+    </ul>
+
+    <h2>🔢 Types of Linear Regression</h2>
+
+    <h3>1. Simple Linear Regression (Single Variable)</h3>
+    <p>
+      This involves <strong>independent variable and one dependent variable</strong> independent variable and one dependent variable. It fits a straight line to the data.
+    </p>
+    <p><strong>Equation:</strong></p>
+    <p><code>Y = β₀ + β₁X</code></p>
+    <ul>
+      <li><code>Y</code> = predicted value</li>
+      <li><code>X</code> = input feature</li>
+      <li><code>β₀</code> = intercept</li>
+      <li><code>β₁</code> = slope (coefficient)</li>
+    </ul>
+
+    <h3>2. Multiple Linear Regression</h3>
+    <p>
+      This involves <strong>two or more independent variables.</strong> It fits a hyperplane to the data in multidimensional space.
+    </p>
+    <p><strong>Equation:</strong></p>
+    <p><code>Y = β₀ + β₁X₁ + β₂X₂ + ... + βₙXₙ</code></p>
+    <ul>
+      <li><code>X₁, X₂, ..., Xₙ</code> = multiple features</li>
+      <li><code>β₁, β₂, ..., βₙ</code> = coefficients for each feature</li>
+    </ul>
+
+    <h2>📈 Understanding the Linear Regression Graph</h2>
+    <p>
+      The graph of a linear regression model (in simple form) is a straight line that best fits the data points.
+      The goal is to minimize the distance between the actual data points and the predicted line using a technique called <strong>least squares</strong>.
+    </p>
+    <p>The slope of the line indicates the strength and direction of the relationship:</p>
+    <ul>
+      <li>Positive slope: as X increases, Y increases</li>
+      <li>Negative slope: as X increases, Y decreases</li>
+      <li>Flat slope: little or no relationship</li>
+    </ul>
+
+    <div class="image-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/640px-Linear_regression.svg.png" alt="Linear Regression Graph Example">
+      <p><em>Example: Linear regression line fit to data points</em></p>
+    </div>
+
+    <h2>📝 Real-World Example</h2>
+    <p>
+      Let's say a student wants to predict their exam score based on hours studied:
+    </p>
+    <ul>
+      <li><strong>Input (X):</strong> Hours Studied</li>
+      <li><strong>Output (Y):</strong> Exam Score</li>
+    </ul>
+    <p>We can build a simple linear regression model:</p>
+    <p><code>Score = 30 + 5 × Hours</code></p>
+    <p>So, if a student studies for 6 hours, the predicted score is:</p>
+    <p><code>Score = 30 + 5 × 6 = 60</code></p>
+
+  </div>
+
+  
+
+</body>
+</html>

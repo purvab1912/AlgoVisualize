@@ -1,0 +1,123 @@
+<div class="container">
+  <h2>🧠 What is Deep Q-Network (DQN)?</h2>
+  <p>
+    <strong>Deep Q-Network (DQN)</strong> is an advanced reinforcement learning algorithm that combines Q-Learning with deep neural networks.  
+    While traditional Q-learning uses a Q-table to store state-action values, DQN replaces this table with a deep neural network to handle environments with large or continuous state spaces.
+  </p>
+
+  <h2>📌 Why Use DQN?</h2>
+  <p>
+    In many real-world scenarios, it's impractical or impossible to store Q-values for every state-action pair in a table.  
+    DQN uses a neural network to approximate the Q-function, allowing it to generalize across similar states and scale to complex environments like video games or robotics.
+  </p>
+
+  <h2>🧮 Core Formula</h2>
+  <div class="formula-box">
+    <p><strong>L(θ) = [R + γ max<sub>a′</sub> Q(s′, a′; θ<sup>−</sup>) − Q(s, a; θ)]²</strong></p>
+  </div>
+  <p>
+    <strong>Where:</strong><br>
+    <ul>
+      <li><strong>L(θ):</strong> Loss function used to update the network</li>
+      <li><strong>θ:</strong> Parameters of the current Q-network</li>
+      <li><strong>θ⁻:</strong> Parameters of the target network (periodically updated)</li>
+      <li><strong>R:</strong> Reward received after taking action</li>
+      <li><strong>γ:</strong> Discount factor</li>
+      <li><strong>s, a, s′:</strong> Current state, action taken, and next state</li>
+    </ul>
+  </p>
+
+  <h2>📊 Key Components of DQN</h2>
+  <ul>
+    <li><strong>Experience Replay:</strong> Stores past experiences in a replay buffer and trains the model on random batches to break correlations in the data.</li>
+    <li><strong>Target Network:</strong> A separate neural network used to calculate the target Q-value, updated periodically to stabilize learning.</li>
+    <li><strong>Exploration Strategy:</strong> Epsilon-greedy is commonly used to balance exploration and exploitation.</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li>Game playing (Atari, Chess, Go, etc.)</li>
+    <li>Autonomous vehicles and robotic control</li>
+    <li>Recommendation engines</li>
+    <li>Smart grid and energy optimization</li>
+    <li>Natural language processing (NLP) tasks with RL</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/deepQ.png" alt="Deep Q Network architecture">
+    <p><em>Q-function approximated by deep neural networks with experience replay and a target network.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Handles high-dimensional or continuous state spaces</li>
+    <li>Improved learning stability with experience replay and target networks</li>
+    <li>Generalizes better than tabular Q-learning</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Training is computationally expensive</li>
+    <li>Hyperparameter tuning is critical</li>
+    <li>Sample inefficiency — needs many experiences to learn</li>
+    <li>Susceptible to catastrophic forgetting without proper replay</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .formula-box {
+    text-align: center;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-left: 5px solid #3498db;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

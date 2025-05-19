@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stack Visualization</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f0f8ff;
+      color: #1e3a5f;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      background-color: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.1);
+    }
+
+    .description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    select, input, button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    select, input {
+      background-color: #d4e8f9;
+      color: #1e3a5f;
+      min-width: 120px;
+    }
+
+    button {
+      background-color: #a4c9e9;
+      color: #1e3a5f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #8eb8e3;
+    }
+
+    .stack-container {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      min-height: 300px;
+      padding: 20px;
+      background-color: #eaf4fb;
+      border-radius: 12px;
+      box-shadow: inset 0 0 8px rgba(30, 58, 95, 0.05);
+      position: relative;
+    }
+
+    .stack-box {
+      width: 80px;
+      height: 50px;
+      margin: 5px 0;
+      background-color: #b2d7f7;
+      color: #1e3a5f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .stack-box.highlight {
+      background-color: #7fbff5;
+    }
+
+    .top-label {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #1e3a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Stack Visualization</h1>
+
+    <div class="description">
+      <p>A <strong>stack</strong> is a linear data structure that follows the <strong>LIFO</strong> (Last In, First Out) principle.</p>
+      <p>Supported operations:</p>
+      <ul>
+        <li><strong>Push</strong> – Add an element to the top of the stack</li>
+        <li><strong>Pop</strong> – Remove the top element</li>
+        <li><strong>Peek</strong> – View the top element</li>
+      </ul>
+    </div>
+
+    <div class="controls">
+      <select id="operation" onchange="toggleInput()">
+        <option value="" disabled selected>Select Operation</option>
+        <option value="push">Push</option>
+        <option value="pop">Pop</option>
+        <option value="peek">Peek</option>
+      </select>
+
+      <input type="number" id="valueInput" placeholder="Enter value" style="display: none;" />
+      <button onclick="performStackOperation()">Visualize</button>
+    </div>
+
+    <div class="stack-container" id="stackContainer">
+      <div class="top-label">Top</div>
+    </div>
+  </div>
+
+  <script>
+    const stack = [];
+    const stackContainer = document.getElementById('stackContainer');
+
+    function toggleInput() {
+      const op = document.getElementById('operation').value;
+      document.getElementById('valueInput').style.display = (op === 'push') ? 'inline-block' : 'none';
+    }
+
+    function renderStack(highlightTop = false) {
+      stackContainer.innerHTML = '<div class="top-label">Top</div>';
+      stack.forEach((val, i) => {
+        const box = document.createElement('div');
+        box.className = 'stack-box';
+        box.innerText = val;
+        if (highlightTop && i === stack.length - 1) {
+          box.classList.add('highlight');
+        }
+        stackContainer.appendChild(box);
+      });
+    }
+
+    function performStackOperation() {
+      const operation = document.getElementById('operation').value;
+      const value = parseInt(document.getElementById('valueInput').value);
+
+      switch (operation) {
+        case 'push':
+          if (isNaN(value)) return alert('Enter a value to push.');
+          stack.push(value);
+          renderStack(true);
+          break;
+
+        case 'pop':
+          if (stack.length === 0) return alert('Stack is empty.');
+          stack.pop();
+          renderStack(true);
+          break;
+
+        case 'peek':
+          if (stack.length === 0) return alert('Stack is empty.');
+          renderStack(true);
+          alert(`Top of stack: ${stack[stack.length - 1]}`);
+          break;
+
+        default:
+          alert('Select a valid operation.');
+      }
+    }
+
+    // Initial render
+    renderStack();
+  </script>
+</body>
+</html>

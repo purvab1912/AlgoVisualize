@@ -1,0 +1,103 @@
+<div class="container">
+  <h2>📍 What is K-Means Clustering?</h2>
+  <p>
+    K-Means is an unsupervised machine learning algorithm used for <strong>clustering</strong>. It groups data into <strong>K distinct, non-overlapping clusters</strong> based on similarity. It is widely used in pattern recognition, image compression, and customer segmentation.
+  </p>
+
+  <h2>🔧 How Does K-Means Work?</h2>
+  <ol>
+    <li>Choose the number of clusters <strong>K</strong></li>
+    <li>Initialize K centroids randomly</li>
+    <li>Assign each data point to the nearest centroid</li>
+    <li>Recalculate centroids by averaging all points in each cluster</li>
+    <li>Repeat steps 3–4 until centroids no longer change significantly</li>
+  </ol>
+
+  <h2>🧪 Example Use Cases</h2>
+  <ul>
+    <li>Customer segmentation in marketing</li>
+    <li>Market basket analysis</li>
+    <li>Document or text clustering</li>
+    <li>Image compression</li>
+    <li>Grouping search results</li>
+  </ul>
+
+  <h2>📊 Equation Used</h2>
+  <p>
+    The objective of K-Means is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>:
+  </p>
+  <pre><code><strong>
+    J = Σ Σ ||xi - μj||²
+        j   i
+  </strong></code></pre>
+  <p>
+    Where <code>xi</code> is a data point, and <code>μj</code> is the centroid of cluster j.
+  </p>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <!-- Replace with your actual image path -->
+    <img src="../images/kmeans.png" alt="K-Means Clustering Example">
+    <p><em>Sample image showing 3 clusters and their centroids</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Simple and fast for large datasets</li>
+    <li>Works well when clusters are well-separated</li>
+    <li>Easy to implement and interpret</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Must specify the number of clusters K in advance</li>
+    <li>Not suitable for non-spherical or overlapping clusters</li>
+    <li>Sensitive to outliers and initial centroid placement</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 30px;
+  }
+
+  p, li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1em;
+    overflow-x: auto;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+</style>

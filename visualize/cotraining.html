@@ -1,0 +1,94 @@
+<div class="container">
+  <h2>🤝 What is Co-Training?</h2>
+  <p>
+    Co-Training is a semi-supervised learning technique where two or more classifiers are trained simultaneously on different "views" or feature sets of the same data.  
+    Each classifier teaches the other by labeling unlabeled data, leveraging complementary information to improve overall performance.
+  </p>
+
+  <h2>📚 Detailed Concept</h2>
+  <p>
+    The fundamental idea behind co-training is to exploit multiple distinct and sufficient views of the data. For example, in web page classification, one view could be the words on the page, and the other view could be the anchor text of links pointing to the page.  
+    Initially, a small set of labeled examples is used to train separate classifiers on each view. Then, each classifier labels some unlabeled data it is confident about and shares those labels with the other classifier. This iterative process continues, allowing the classifiers to learn from each other.
+  </p>
+
+  <h2>🧩 Uses of Co-Training</h2>
+  <ul>
+    <li>Improving classification accuracy when labeled data is scarce.</li>
+    <li>Leveraging multiple feature sets or data modalities.</li>
+    <li>Reducing reliance on extensive labeled datasets.</li>
+  </ul>
+
+  <h2>🚀 Applications</h2>
+  <ul>
+    <li><strong>Natural Language Processing:</strong> Web page classification, spam filtering.</li>
+    <li><strong>Computer Vision:</strong> Combining different feature extractors for image classification.</li>
+    <li><strong>Speech Recognition:</strong> Using audio and visual features jointly.</li>
+    <li><strong>Bioinformatics:</strong> Combining gene expression and sequence data.</li>
+  </ul>
+
+  <h2>🖼️ Visualization</h2>
+  <div class="image-box">
+    <img src="../images/cotraining.png" alt="Co-Training semi-supervised learning visualization">
+    <p><em>Visualization of Co-Training: Two classifiers trained on different feature sets iteratively label unlabeled data to improve learning.</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Effectively uses multiple views to improve learning.</li>
+    <li>Can significantly boost accuracy with limited labeled data.</li>
+    <li>Relatively simple to implement when distinct views exist.</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Requires multiple sufficient and conditionally independent views of the data.</li>
+    <li>Performance degrades if views are not truly independent.</li>
+    <li>May propagate errors if confident but wrong labels are shared.</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #34495e;
+  }
+
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .image-box p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1em;
+  }
+</style>

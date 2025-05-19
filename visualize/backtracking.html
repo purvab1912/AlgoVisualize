@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>N-Queens Backtracking Visualization</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1e3a5f;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    .controls {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    input[type=number] {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #d4e8f9;
+      color: #1e3a5f;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #a4c9e9;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #1e3a5f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #8eb8e3;
+    }
+    #board {
+      display: grid;
+      gap: 2px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(30, 58, 95, 0.15);
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #b2d7f7;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      color: #1e3a5f;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .cell.queen {
+      background-color: #2e64c9;
+      color: white;
+    }
+    .cell.conflict {
+      background-color: #a0c4f7;
+    }
+    .cell.backtrack {
+      background-color: #7fa5de;
+    }
+  </style>
+</head>
+<body>
+  <h1>N-Queens Backtracking Visualization</h1>
+
+  <div class="controls">
+    <label for="boardSize">Board Size (N): </label>
+    <input type="number" id="boardSize" min="4" max="15" value="8" />
+    <button onclick="startVisualization()">Start Visualization</button>
+    <button onclick="resetBoard()">Reset</button>
+  </div>
+
+  <div id="board"></div>
+
+  <script>
+    const boardDiv = document.getElementById('board');
+    const boardSizeInput = document.getElementById('boardSize');
+
+    let N = 8;
+    let board = [];
+    let delay = 500; // ms delay for visualization
+
+    function resetBoard() {
+      board = [];
+      boardDiv.innerHTML = '';
+    }
+
+    function createBoard() {
+      resetBoard();
+      N = parseInt(boardSizeInput.value);
+      if (isNaN(N) || N < 4 || N > 15) {
+        alert('Please enter a board size between 4 and 15.');
+        return false;
+      }
+
+      boardDiv.style.gridTemplateColumns = `repeat(${N}, 40px)`;
+      boardDiv.style.gridTemplateRows = `repeat(${N}, 40px)`;
+
+      for (let r = 0; r < N; r++) {
+        board[r] = [];
+        for (let c = 0; c < N; c++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          cell.id = `cell-${r}-${c}`;
+          boardDiv.appendChild(cell);
+          board[r][c] = 0; // 0 = empty, 1 = queen
+        }
+      }
+      return true;
+    }
+
+    function updateCell(row, col, type) {
+      const cell = document.getElementById(`cell-${row}-${col}`);
+      cell.className = 'cell'; // reset classes
+      if (type === 'queen') {
+        cell.classList.add('queen');
+        cell.textContent = '♛';
+      } else if (type === 'conflict') {
+        cell.classList.add('conflict');
+        cell.textContent = '';
+      } else if (type === 'backtrack') {
+        cell.classList.add('backtrack');
+        cell.textContent = '';
+      } else {
+        cell.textContent = '';
+      }
+    }
+
+    function isSafe(row, col) {
+      // Check left side on same row
+      for (let i = 0; i < col; i++) {
+        if (board[row][i] === 1) return false;
+      }
+      // Check upper diagonal on left side
+      for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j] === 1) return false;
+      }
+      // Check lower diagonal on left side
+      for (let i = row, j = col; i < N && j >= 0; i++, j--) {
+        if (board[i][j] === 1) return false;
+      }
+      return true;
+    }
+
+    async function solveNQueens(col = 0) {
+      if (col >= N) return true;
+
+      for (let row = 0; row < N; row++) {
+        updateCell(row, col, 'conflict');
+        await sleep(delay);
+
+        if (isSafe(row, col)) {
+          board[row][col] = 1;
+          updateCell(row, col, 'queen');
+          await sleep(delay);
+
+          if (await solveNQueens(col + 1)) return true;
+
+          // Backtrack
+          board[row][col] = 0;
+          updateCell(row, col, 'backtrack');
+          await sleep(delay);
+          updateCell(row, col, ''); // reset after backtrack color
+        } else {
+          updateCell(row, col, '');
+        }
+      }
+      return false;
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function startVisualization() {
+      if (!createBoard()) return;
+      await solveNQueens();
+      alert('Visualization complete!');
+    }
+  </script>
+</body>
+</html>

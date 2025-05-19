@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Searching Algorithm Visualization</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background-color: #f0f8ff;
+      color: #1e3a5f;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .description {
+      background-color: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.1);
+    }
+    .description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    select, input, button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    select, input {
+      background-color: #d4e8f9;
+      color: #1e3a5f;
+      min-width: 180px;
+    }
+    button {
+      background-color: #a4c9e9;
+      color: #1e3a5f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      min-width: 120px;
+    }
+    button:hover {
+      background-color: #8eb8e3;
+    }
+    .array-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      background-color: #eaf4fb;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: inset 0 0 8px rgba(30, 58, 95, 0.05);
+      overflow-x: auto;
+      min-height: 100px;
+    }
+    .array-box {
+      width: 50px;
+      height: 50px;
+      background-color: #b2d7f7;
+      border-radius: 8px;
+      color: #1e3a5f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      user-select: none;
+      position: relative;
+      transition: background-color 0.3s;
+      cursor: default;
+    }
+    .array-box.highlight {
+      background-color: #7fbff5;
+    }
+    .array-box.found {
+      background-color: #2e64c9;
+      color: white;
+    }
+    .array-box.searched {
+      background-color: #5590e3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Searching Algorithm Visualization</h1>
+
+    <div class="description">
+      <p>Visualize basic searching algorithms step-by-step.</p>
+      <p>Supported algorithms:</p>
+      <ul>
+        <li><strong>Linear Search</strong>: Search sequentially through the array.</li>
+        <li><strong>Binary Search</strong>: Efficient search on sorted arrays by dividing search space.</li>
+      </ul>
+    </div>
+
+    <div class="controls">
+      <input
+        type="text"
+        id="arrayInput"
+        placeholder="Enter nums separated by ,"
+        title="Example: 1,3,5,7,9"
+      />
+      <input
+        type="number"
+        id="targetInput"
+        placeholder="Enter target value"
+      />
+      <select id="algorithm">
+        <option value="" disabled selected>Select Algorithm</option>
+        <option value="linear">Linear Search</option>
+        <option value="binary">Binary Search (sorted array)</option>
+      </select>
+      <button onclick="startSearch()">Visualize</button>
+    </div>
+
+    <div class="array-container" id="arrayContainer"></div>
+  </div>
+
+  <script>
+    const arrayInput = document.getElementById('arrayInput');
+    const targetInput = document.getElementById('targetInput');
+    const algorithmSelect = document.getElementById('algorithm');
+    const arrayContainer = document.getElementById('arrayContainer');
+
+    let array = [];
+
+    function renderArray(highlight = {}, foundIndex = -1, searched = {}) {
+      arrayContainer.innerHTML = '';
+      array.forEach((val, idx) => {
+        const box = document.createElement('div');
+        box.className = 'array-box';
+        box.innerText = val;
+
+        if (idx === foundIndex) {
+          box.classList.add('found');
+        } else if (highlight[idx]) {
+          box.classList.add('highlight');
+        } else if (searched[idx]) {
+          box.classList.add('searched');
+        }
+        arrayContainer.appendChild(box);
+      });
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function linearSearch(target) {
+      for (let i = 0; i < array.length; i++) {
+        renderArray({[i]: true});
+        await sleep(600);
+        if (array[i] === target) {
+          renderArray({}, i);
+          return i;
+        }
+        renderArray({}, -1, {[i]: true});
+      }
+      return -1;
+    }
+
+    async function binarySearch(target) {
+      let left = 0;
+      let right = array.length - 1;
+
+      while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        renderArray({[mid]: true});
+        await sleep(800);
+
+        if (array[mid] === target) {
+          renderArray({}, mid);
+          return mid;
+        } else if (array[mid] < target) {
+          left = mid + 1;
+        } else {
+          right = mid - 1;
+        }
+        // Mark mid as searched but not found
+        renderArray({}, -1, {[mid]: true});
+        await sleep(400);
+      }
+      return -1;
+    }
+
+    async function startSearch() {
+      const input = arrayInput.value.trim();
+      const target = Number(targetInput.value);
+
+      if (!input) {
+        alert('Please enter an array of numbers.');
+        return;
+      }
+      array = input.split(',').map(x => Number(x.trim()));
+      if (array.some(isNaN)) {
+        alert('Please enter valid numbers only.');
+        return;
+      }
+
+      if (isNaN(targetInput.value) || targetInput.value === '') {
+        alert('Please enter a target value.');
+        return;
+      }
+
+      const algo = algorithmSelect.value;
+      if (!algo) {
+        alert('Please select a searching algorithm.');
+        return;
+      }
+
+      // For binary search, array must be sorted
+      if (algo === 'binary') {
+        const sorted = [...array].sort((a,b) => a - b);
+        if (!arraysEqual(array, sorted)) {
+          alert('For binary search, please enter a sorted array.');
+          return;
+        }
+      }
+
+      renderArray();
+      let resultIndex = -1;
+
+      if (algo === 'linear') {
+        resultIndex = await linearSearch(target);
+      } else if (algo === 'binary') {
+        resultIndex = await binarySearch(target);
+      }
+
+      if (resultIndex === -1) {
+        alert('Target value not found in the array.');
+      } else {
+        alert(`Target found at index ${resultIndex}.`);
+      }
+    }
+
+    function arraysEqual(a, b) {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

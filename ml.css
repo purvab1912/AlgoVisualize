@@ -1,0 +1,160 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E3A8A;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.navbar-left {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.algo-dropdown {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.chatbox-btn {
+  padding: 0.5rem 1rem;
+  background-color: #2980b9;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Info Section */
+.info-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: white;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-text {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.info-text h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.info-text p {
+  font-size: 1.1rem;
+}
+
+.info-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Algorithm Categories */
+.algo-category {
+  margin: 2rem 1rem;
+}
+
+.algo-category h2 {
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+/* Algorithm Grid */
+.algo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+/* Algorithm Box */
+.algo-box {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.algo-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.algo-box h3 {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  min-height: 50px; /* To keep consistent box height */
+}
+
+.visualize-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #27ae60;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.visualize-btn:hover {
+  background-color: #1e8449;
+}
+
+/* Responsive - Optional */
+@media (max-width: 900px) {
+  .algo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .info-section {
+    flex-direction: column;
+  }
+  .info-text {
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+  .algo-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,102 @@
+<div class="container">
+  <h2>🌳 What is Random Forest?</h2>
+  <p>
+    Random Forest is an ensemble machine learning algorithm that builds and combines multiple decision trees to improve predictive performance. It is widely used for both classification and regression tasks.
+  </p>
+
+  <h2>🔧 How Does It Work?</h2>
+  <p>
+    A Random Forest creates a large number of decision trees using different subsets of the training data and features. For classification, it takes a majority vote. For regression, it takes the average of predictions.
+  </p>
+  <ul>
+    <li><strong>Bootstrapping:</strong> Trees are trained on random samples (with replacement)</li>
+    <li><strong>Feature Randomness:</strong> Only a subset of features is considered at each split</li>
+  </ul>
+
+  <h2>🧮 Workflow</h2>
+  <ol>
+    <li>Randomly select samples from the dataset</li>
+    <li>Build a decision tree for each subset</li>
+    <li>Repeat the process to create many trees</li>
+    <li>Aggregate the predictions:
+      <ul>
+        <li>Majority vote (classification)</li>
+        <li>Average (regression)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>🧠 Why Use Random Forest?</h2>
+  <ul>
+    <li>Reduces overfitting of individual decision trees</li>
+    <li>Handles missing data well</li>
+    <li>Works with both numerical and categorical data</li>
+  </ul>
+
+  <h2>📊 Applications</h2>
+  <ul>
+    <li>Fraud detection</li>
+    <li>Medical diagnosis</li>
+    <li>Credit risk modeling</li>
+    <li>Customer segmentation</li>
+  </ul>
+
+  <h2>🖼️ Random Forest Visualization</h2>
+  <div class="image-box">
+    <!-- Replace with your PNG image file path or URL -->
+    <img src="../images/randomforest.png" alt="Random Forest PNG Visualization" width="500">
+    <p><em>Illustration of multiple decision trees in a random forest</em></p>
+  </div>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>High accuracy and performance</li>
+    <li>Reduces variance (compared to single trees)</li>
+    <li>Resistant to overfitting</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Training can be slow for large datasets</li>
+    <li>Less interpretable than single trees</li>
+    <li>Requires more memory and computation</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 20px;
+  }
+
+  p, li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+</style>

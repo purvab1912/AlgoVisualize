@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ML Algorithm Visualization</title>
+  <link rel="stylesheet" href="ml.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">AlgoVisualizer</div>
+    <div class="navbar-right">
+      <select class="algo-dropdown">
+        <option selected disabled>Select Algorithm</option>
+        <option>Supervised Machine Learning</option>
+        <option>Unsupervised Machine Learning</option>
+        <option>Semi Supervised Machine Learning</option>
+        <option>Reinforcement Machine Learning</option>
+      </select>
+      
+    </div>
+  </nav>
+
+  <!-- Information Section -->
+  <section class="info-section">
+    <div class="info-text">
+      <h1>Welcome to DSA Algorithm Visualizer</h1>
+      <p>
+        AlgoVisualizer is an interactive platform designed to help learners, data scientists, and AI enthusiasts understand Machine Learning algorithms through real-time visualizations. We transform complex math and models into simple, animated experiences to make learning intuitive and impactful.
+      </p>
+      <br>
+      <p>
+        Understanding ML theory can be tough, but seeing how models learn makes everything click. Whether you're a beginner or an experienced developer, our tools make learning engaging, clear, and hands-on.
+      </p>
+      <br>
+      <p>
+        Pick an algorithm, tweak its settings, visualize its behavior, and watch Machine Learning come to life.
+      </p>
+    </div>
+    <div class="info-image">
+      <img src="images/mlalgo.png" alt="Algorithm Illustration" />
+    </div>
+  </section>
+
+  <!-- Algorithms Sections -->
+
+  <section class="algo-category">
+    <h2>🔹 Supervised Learning Algorithms</h2>
+    <div class="algo-grid">
+      <div class="algo-box">
+        <img src="images/linearregression.png" alt="Linear Regression" />
+        <h3>Linear Regression</h3>
+        <a href="visualize/linear_regression.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/logisticregression.png" alt="Logistic Regression" />
+        <h3>Logistic Regression</h3>
+        <a href="visualize/logistic_regression.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/decisiontree.png" alt="Decision Trees" />
+        <h3>Decision Trees</h3>
+        <a href="visualize/decision_trees.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/svm.png" alt="Support Vector Machines" />
+        <h3>Support Vector Machines (SVM)</h3>
+        <a href="visualize/svm.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/randomforest.png" alt="Random Forest" />
+        <h3>Random Forest</h3>
+        <a href="visualize/random_forest.html" class="visualize-btn">Visualize</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="algo-category">
+    <h2>🔹 Unsupervised Learning Algorithms</h2>
+    <div class="algo-grid">
+      <div class="algo-box">
+        <img src="images/kmeans.png" alt="K-Means Clustering" />
+        <h3>K-Means Clustering</h3>
+        <a href="visualize/kmeans.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/hierarchial.png" alt="Hierarchical Clustering" />
+        <h3>Hierarchical Clustering</h3>
+        <a href="visualize/hierarchialcluster.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/dbscan.png" alt="DBSCAN" />
+        <h3>DBSCAN</h3>
+        <a href="visualize/dbscan.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/pca.png" alt="PCA" />
+        <h3>Principal Component Analysis (PCA)</h3>
+        <a href="visualize/pca.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/autoencoders.png" alt="Autoencoders" />
+        <h3>Autoencoders</h3>
+        <a href="visualize/autoencoders.html" class="visualize-btn">Visualize</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="algo-category">
+    <h2>🔹 Semi-Supervised Learning Algorithms</h2>
+    <div class="algo-grid">
+      <div class="algo-box">
+        <img src="images/selftraining.png" alt="Self-Training" />
+        <h3>Self-Training</h3>
+        <a href="visualize/selftraining.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/label.png" alt="Label Propagation" />
+        <h3>Label Propagation</h3>
+        <a href="visualize/label_propagation.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/cotraining.png" alt="Co-Training" />
+        <h3>Co-Training</h3>
+        <a href="visualize/cotraining.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/s3vm.png" alt="Semi-Supervised SVM" />
+        <h3>Semi-Supervised SVM (S3VM)</h3>
+        <a href="visualize/s3vm.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/Screenshot 2025-05-18 193652.png" alt="Graph-Based Semi-Supervised Learning" />
+        <h3>Graph-Based Semi-Supervised Learning</h3>
+        <a href="visualize/graph_semi_supervised.html" class="visualize-btn">Visualize</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="algo-category">
+    <h2>🔹 Reinforcement Learning Algorithms</h2>
+    <div class="algo-grid">
+      <div class="algo-box">
+        <img src="images/qlearning.png" alt="Q-Learning" />
+        <h3>Q-Learning</h3>
+        <a href="visualize/qlearning.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/sarsa.png" alt="SARSA" />
+        <h3>SARSA</h3>
+        <a href="visualize/sarsa.html" class="visualize-btn">Visualize</a>
+      </div>
+      <div class="algo-box">
+        <img src="images/deepQ.png" alt="Deep Q-Networks" />
+        <h3>Deep Q-Networks (DQN)</h3>
+        <a href="visualize/dqn.html" class="visualize-btn">Visualize</a>
+      </div>
+      
+    </div>
+  </section>
+</body>
+</html>

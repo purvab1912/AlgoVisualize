@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graph Visualization</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background-color: #f0f8ff;
+      color: #1e3a5f;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .description {
+      background-color: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.1);
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      background-color: #d4e8f9;
+      color: #1e3a5f;
+      min-width: 140px;
+    }
+    button {
+      background-color: #a4c9e9;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      min-width: 120px;
+    }
+    button:hover {
+      background-color: #8eb8e3;
+    }
+    #graphCanvas {
+      background-color: #eaf4fb;
+      border-radius: 12px;
+      box-shadow: inset 0 0 8px rgba(30, 58, 95, 0.05);
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #a4c9e9;
+    }
+    .edges-list {
+      max-height: 120px;
+      overflow-y: auto;
+      background-color: #e6f0fa;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #1e3a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Graph Visualization</h1>
+
+    <div class="description">
+      <p>Input a graph by specifying nodes and edges, then visualize BFS or DFS traversal.</p>
+      <p>Operations:</p>
+      <ul>
+        <li>Specify number of nodes</li>
+        <li>Add edges (undirected)</li>
+        <li>Visualize Breadth-First Search (BFS) or Depth-First Search (DFS)</li>
+      </ul>
+    </div>
+
+    <div class="controls">
+      <input type="number" id="numNodes" placeholder="Number of Nodes" min="1" />
+      <input type="text" id="edgeFrom" placeholder="Edge From (node #)" />
+      <input type="text" id="edgeTo" placeholder="Edge To (node #)" />
+      <button onclick="addEdge()">Add Edge</button>
+    </div>
+
+    <div class="controls" style="justify-content: center; margin-bottom: 20px;">
+      <select id="traversalAlgo">
+        <option value="" disabled selected>Select Traversal</option>
+        <option value="bfs">Breadth-First Search (BFS)</option>
+        <option value="dfs">Depth-First Search (DFS)</option>
+      </select>
+      <input type="number" id="startNode" placeholder="Start Node" min="0" />
+      <button onclick="startTraversal()">Visualize Traversal</button>
+      <button onclick="resetGraph()">Reset</button>
+    </div>
+
+    <div>
+      <canvas id="graphCanvas" width="700" height="400"></canvas>
+    </div>
+
+    <div class="edges-list" id="edgesList">
+      <strong>Edges:</strong> <br />
+      (Add edges above)
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const numNodesInput = document.getElementById('numNodes');
+    const edgeFromInput = document.getElementById('edgeFrom');
+    const edgeToInput = document.getElementById('edgeTo');
+    const edgesListDiv = document.getElementById('edgesList');
+    const traversalAlgoSelect = document.getElementById('traversalAlgo');
+    const startNodeInput = document.getElementById('startNode');
+
+    let numNodes = 0;
+    let edges = [];
+    let adjacencyList = [];
+    let nodePositions = [];
+    const nodeRadius = 20;
+
+    function resetGraph() {
+      numNodes = 0;
+      edges = [];
+      adjacencyList = [];
+      nodePositions = [];
+      numNodesInput.value = '';
+      edgeFromInput.value = '';
+      edgeToInput.value = '';
+      edgesListDiv.innerHTML = '<strong>Edges:</strong> <br />(Add edges above)';
+      traversalAlgoSelect.value = '';
+      startNodeInput.value = '';
+      clearCanvas();
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function addEdge() {
+      if (!numNodesInput.value || numNodesInput.value <= 0) {
+        alert('Please enter a valid number of nodes first.');
+        return;
+      }
+      numNodes = parseInt(numNodesInput.value);
+      if (adjacencyList.length === 0) {
+        // initialize adjacency list
+        adjacencyList = Array.from({length: numNodes}, () => []);
+        calculateNodePositions();
+      }
+
+      const from = Number(edgeFromInput.value);
+      const to = Number(edgeToInput.value);
+      if (
+        isNaN(from) || isNaN(to) ||
+        from < 0 || from >= numNodes ||
+        to < 0 || to >= numNodes
+      ) {
+        alert(`Please enter valid node indices (0 to ${numNodes - 1}).`);
+        return;
+      }
+
+      // For undirected graph, add edges both ways
+      adjacencyList[from].push(to);
+      adjacencyList[to].push(from);
+
+      edges.push([from, to]);
+      updateEdgesList();
+      drawGraph();
+      edgeFromInput.value = '';
+      edgeToInput.value = '';
+    }
+
+    function updateEdgesList() {
+      let html = '<strong>Edges:</strong><br>';
+      if (edges.length === 0) {
+        html += '(Add edges above)';
+      } else {
+        edges.forEach(([f, t], i) => {
+          html += `Edge ${i+1}: ${f} — ${t}<br>`;
+        });
+      }
+      edgesListDiv.innerHTML = html;
+    }
+
+    function calculateNodePositions() {
+      nodePositions = [];
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = Math.min(centerX, centerY) - 60;
+
+      for (let i = 0; i < numNodes; i++) {
+        const angle = (2 * Math.PI * i) / numNodes;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        nodePositions.push({x, y});
+      }
+    }
+
+    function drawGraph(visitedNodes = [], currentNode = null) {
+      clearCanvas();
+
+      // Draw edges
+      ctx.strokeStyle = '#7fbff5';
+      ctx.lineWidth = 2;
+      edges.forEach(([f, t]) => {
+        const fromPos = nodePositions[f];
+        const toPos = nodePositions[t];
+        ctx.beginPath();
+        ctx.moveTo(fromPos.x, fromPos.y);
+        ctx.lineTo(toPos.x, toPos.y);
+        ctx.stroke();
+      });
+
+      // Draw nodes
+      nodePositions.forEach(({x, y}, idx) => {
+        ctx.beginPath();
+        ctx.fillStyle = visitedNodes.includes(idx) ? '#2e64c9' : (idx === currentNode ? '#5590e3' : '#b2d7f7');
+        ctx.strokeStyle = '#1e3a5f';
+        ctx.lineWidth = 2;
+        ctx.arc(x, y, nodeRadius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = visitedNodes.includes(idx) ? 'white' : '#1e3a5f';
+        ctx.font = 'bold 16px Segoe UI';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(idx, x, y);
+      });
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function bfs(start) {
+      let visited = Array(numNodes).fill(false);
+      let queue = [start];
+      visited[start] = true;
+      let order = [];
+
+      while (queue.length > 0) {
+        let node = queue.shift();
+        order.push(node);
+        drawGraph(order, node);
+        await sleep(700);
+
+        adjacencyList[node].forEach(neighbor => {
+          if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            queue.push(neighbor);
+          }
+        });
+      }
+    }
+
+    async function dfsUtil(node, visited, order) {
+      visited[node] = true;
+      order.push(node);
+      drawGraph(order, node);
+      await sleep(700);
+
+      for (const neighbor of adjacencyList[node]) {
+        if (!visited[neighbor]) {
+          await dfsUtil(neighbor, visited, order);
+        }
+      }
+    }
+
+    async function dfs(start) {
+      let visited = Array(numNodes).fill(false);
+      let order = [];
+      await dfsUtil(start, visited, order);
+    }
+
+    async function startTraversal() {
+      if (numNodes <= 0) {
+        alert('Please enter a valid number of nodes.');
+        return;
+      }
+      if (adjacencyList.length === 0) {
+        alert('Please add edges first.');
+        return;
+      }
+      const start = Number(startNodeInput.value);
+      if (isNaN(start) || start < 0 || start >= numNodes) {
+        alert(`Please enter a valid start node between 0 and ${numNodes - 1}.`);
+        return;
+      }
+      const algo = traversalAlgoSelect.value;
+      if (!algo) {
+        alert('Please select a traversal algorithm.');
+        return;
+      }
+
+      if (algo === 'bfs') {
+        await bfs(start);
+      } else if (algo === 'dfs') {
+        await dfs(start);
+      }
+      alert('Traversal complete!');
+    }
+
+    // Initial draw empty
+    resetGraph();
+  </script>
+</body>
+</html>

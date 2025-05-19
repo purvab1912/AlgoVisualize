@@ -1,0 +1,121 @@
+<div class="container">
+  <h2>💡 What is a Support Vector Machine (SVM)?</h2>
+  <p>
+    Support Vector Machine (SVM) is a supervised machine learning algorithm used for both classification and regression tasks, though it is mostly used for classification. It finds the optimal hyperplane that best separates data points of different classes.
+  </p>
+
+  <h2>🧠 How Does It Work?</h2>
+  <p>
+    SVM tries to find a decision boundary (called a <strong>hyperplane</strong>) that separates classes with the largest possible margin. The data points that are closest to the hyperplane and influence its position are called <strong>support vectors</strong>.
+  </p>
+  <p>
+    The objective of SVM is to maximize the margin between the classes.
+  </p>
+
+  <h3>📏 Key Concepts:</h3>
+  <ul>
+    <li><strong>Hyperplane:</strong> A line (in 2D), plane (in 3D), or n-dimensional separator between classes.</li>
+    <li><strong>Margin:</strong> Distance between the hyperplane and the closest data points from each class.</li>
+    <li><strong>Support Vectors:</strong> Critical data points lying closest to the hyperplane.</li>
+  </ul>
+
+  <h2>🔢 SVM Equation</h2>
+  <p>
+    For a binary classification:
+  </p>
+  <code>
+    f(x) = w · x + b  
+  </code>
+  <p>
+    Where:
+    <ul>
+      <li><code>w</code> is the weight vector</li>
+      <li><code>x</code> is the input vector</li>
+      <li><code>b</code> is the bias</li>
+    </ul>
+    The classifier predicts class based on the sign of <code>f(x)</code>.
+  </p>
+
+  <h2>⚙️ Kernel Trick</h2>
+  <p>
+    SVM can efficiently handle non-linearly separable data using kernel functions, which transform data into higher-dimensional space.
+  </p>
+  <ul>
+    <li><strong>Linear Kernel:</strong> For linearly separable data</li>
+    <li><strong>Polynomial Kernel:</strong> For curved boundaries</li>
+    <li><strong>Radial Basis Function (RBF):</strong> Popular for non-linear problems</li>
+    <li><strong>Sigmoid Kernel:</strong> Behaves like a neural network</li>
+  </ul>
+
+  <h2>🖼️ SVM Visualization</h2>
+  <div class="image-box">
+    <img src="../images/svm.png" alt="SVM margin and hyperplane">
+    <p><em>Visualization of SVM margin, support vectors, and hyperplane</em></p>
+  </div>
+
+  <h2>📍 Real-World Applications</h2>
+  <ul>
+    <li>Face detection</li>
+    <li>Spam email classification</li>
+    <li>Gene classification (bioinformatics)</li>
+    <li>Handwriting recognition (OCR)</li>
+    <li>Intrusion detection systems</li>
+  </ul>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Effective in high-dimensional spaces</li>
+    <li>Works well with clear margin of separation</li>
+    <li>Memory efficient (uses only support vectors)</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Not suitable for large datasets (training is slow)</li>
+    <li>Less effective on noisy data</li>
+    <li>Choosing the right kernel can be tricky</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  h2, h3 {
+    color: #2c3e50;
+  }
+
+  p {
+    line-height: 1.6;
+    font-size: 1.1em;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  code {
+    background: #f0f0f0;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+</style>

@@ -1,0 +1,105 @@
+<div class="container">
+  <h2>📐 What is Principal Component Analysis (PCA)?</h2>
+  <p>
+    <strong>Principal Component Analysis (PCA)</strong> is an unsupervised dimensionality reduction technique used to simplify datasets while retaining their essential structure. It transforms the original correlated variables into a new set of uncorrelated variables called <strong>principal components</strong>.
+  </p>
+
+  <h2>🎯 Objective of PCA</h2>
+  <p>
+    The goal of PCA is to reduce the number of features (dimensions) in a dataset by projecting it onto a smaller number of <strong>principal components</strong> that explain most of the variance in the data.
+  </p>
+
+  <h2>🔢 How PCA Works (Step-by-Step)</h2>
+  <ol>
+    <li>Standardize the dataset (mean = 0, variance = 1)</li>
+    <li>Compute the covariance matrix</li>
+    <li>Compute eigenvectors and eigenvalues of the covariance matrix</li>
+    <li>Select top-k eigenvectors to form the principal components</li>
+    <li>Transform the data onto the new feature subspace</li>
+  </ol>
+
+  <h2>📉 PCA Equation</h2>
+  <p>
+    PCA uses the eigen decomposition of the covariance matrix <code>C</code>:
+  </p>
+  <pre><code>C = XᵀX / n</code></pre>
+  <p>
+    The eigenvectors of <code>C</code> define the directions of the new feature space, and eigenvalues define their magnitude (variance explained).
+  </p>
+
+  <h2>🖼️ PCA Visualization</h2>
+  <div class="image-box">
+    <!-- Replace with your actual image path -->
+    <img src="../images/pca.png" alt="PCA Example">
+    <p><em>Example: 2D data reduced to 1D using principal components</em></p>
+  </div>
+
+  <h2>🧪 Common Use Cases</h2>
+  <ul>
+    <li>Data visualization (reducing to 2D or 3D)</li>
+    <li>Noise reduction</li>
+    <li>Preprocessing before supervised learning</li>
+    <li>Pattern recognition</li>
+    <li>Image compression</li>
+  </ul>
+
+  <h2>✅ Advantages</h2>
+  <ul>
+    <li>Reduces dimensionality and speeds up models</li>
+    <li>Removes multicollinearity between features</li>
+    <li>Improves visualization for high-dimensional data</li>
+  </ul>
+
+  <h2>⚠️ Limitations</h2>
+  <ul>
+    <li>Hard to interpret transformed features (PCs)</li>
+    <li>Only captures linear relationships</li>
+    <li>Information loss possible if too many components are dropped</li>
+  </ul>
+</div>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 30px;
+  }
+
+  p, li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1em;
+    overflow-x: auto;
+  }
+</style>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Array Visualization with User Inputs</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f0f8ff;
+      color: #1e3a5f;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      background-color: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .description ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    select, input, button {
+      padding: 10px 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    select, input {
+      background-color: #d4e8f9;
+      color: #1e3a5f;
+      min-width: 120px;
+    }
+
+    button {
+      background-color: #a4c9e9;
+      color: #1e3a5f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #8eb8e3;
+    }
+
+    .array-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 160px;
+      padding: 20px;
+      background-color: #eaf4fb;
+      border-radius: 12px;
+      box-shadow: inset 0 0 8px rgba(30, 58, 95, 0.05);
+    }
+
+    .array-bar {
+      width: 50px;
+      background-color: #b2d7f7;
+      color: #1e3a5f;
+      text-align: center;
+      line-height: 1.5;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Array Visualization</h1>
+
+    <div class="description">
+      <p>An <strong>array</strong> is a data structure that stores a fixed-size sequence of elements of the same type. It allows quick access to elements via indexing.</p>
+      <p>Common operations on arrays include:</p>
+      <ul>
+        <li><strong>Insertion</strong> – Add an element at a specific index</li>
+        <li><strong>Deletion</strong> – Remove an element</li>
+        <li><strong>Traversal</strong> – Visit all elements</li>
+        <li><strong>Update</strong> – Change the value of an element</li>
+        <li><strong>Search</strong> – Find an element</li>
+      </ul>
+    </div>
+
+    <div class="controls">
+      <select id="operation" onchange="updateInputFields()">
+        <option value="" disabled selected>Select Operation</option>
+        <option value="insert">Insert</option>
+        <option value="delete">Delete</option>
+        <option value="search">Search</option>
+        <option value="update">Update</option>
+      </select>
+
+      <input type="number" id="valueInput" placeholder="Value" style="display:none;" />
+      <input type="number" id="indexInput" placeholder="Index" style="display:none;" />
+      <button id="visualizeBtn">Visualize</button>
+    </div>
+
+    <div class="array-container" id="arrayContainer">
+      <div class="array-bar" style="height: 80px;">10</div>
+      <div class="array-bar" style="height: 100px;">20</div>
+      <div class="array-bar" style="height: 60px;">15</div>
+      <div class="array-bar" style="height: 120px;">30</div>
+      <div class="array-bar" style="height: 90px;">25</div>
+    </div>
+  </div>
+
+  <script>
+    const operationSelect = document.getElementById('operation');
+    const valueInput = document.getElementById('valueInput');
+    const indexInput = document.getElementById('indexInput');
+    const visualizeBtn = document.getElementById('visualizeBtn');
+    const arrayContainer = document.getElementById('arrayContainer');
+
+    visualizeBtn.addEventListener('click', () => {
+      const operation = operationSelect.value;
+      const value = parseInt(valueInput.value);
+      const index = parseInt(indexInput.value);
+      const bars = arrayContainer.children;
+
+      resetHighlight(bars);
+
+      switch (operation) {
+        case 'insert':
+          if (isNaN(value) || isNaN(index)) return alert('Enter value and index.');
+          insertElement(value, index);
+          break;
+        case 'delete':
+          if (isNaN(index)) return alert('Enter index to delete.');
+          deleteElement(index);
+          break;
+        case 'search':
+          if (isNaN(value)) return alert('Enter value to search.');
+          searchElement(value);
+          break;
+        case 'update':
+          if (isNaN(value) || isNaN(index)) return alert('Enter index and new value.');
+          updateElement(index, value);
+          break;
+        default:
+          alert('Please select an operation.');
+      }
+    });
+
+    function resetHighlight(bars) {
+      for (let bar of bars) {
+        bar.style.backgroundColor = '#b2d7f7';
+      }
+    }
+
+    function insertElement(value, index) {
+      if (index < 0 || index > arrayContainer.children.length) {
+        alert('Invalid index.');
+        return;
+      }
+      const newBar = document.createElement('div');
+      newBar.className = 'array-bar';
+      newBar.style.height = `${value * 2}px`;
+      newBar.textContent = value;
+      newBar.style.backgroundColor = '#79b8f3';
+      newBar.style.opacity = 0;
+
+      if (index >= arrayContainer.children.length) {
+        arrayContainer.appendChild(newBar);
+      } else {
+        arrayContainer.insertBefore(newBar, arrayContainer.children[index]);
+      }
+
+      setTimeout(() => {
+        newBar.style.transition = 'opacity 0.5s ease';
+        newBar.style.opacity = 1;
+      }, 100);
+    }
+
+    function deleteElement(index) {
+      const bars = arrayContainer.children;
+      if (index < 0 || index >= bars.length) {
+        alert('Invalid index.');
+        return;
+      }
+      const bar = bars[index];
+      bar.style.transition = 'opacity 0.5s ease';
+      bar.style.opacity = 0;
+      setTimeout(() => {
+        arrayContainer.removeChild(bar);
+      }, 500);
+    }
+
+    function searchElement(value) {
+      const bars = arrayContainer.children;
+      let found = false;
+      for (let bar of bars) {
+        if (parseInt(bar.textContent) === value) {
+          bar.style.backgroundColor = '#4ba3f2';
+          found = true;
+        }
+      }
+      if (!found) alert('Value not found.');
+    }
+
+    function updateElement(index, newValue) {
+      const bars = arrayContainer.children;
+      if (index < 0 || index >= bars.length) {
+        alert('Invalid index.');
+        return;
+      }
+      const bar = bars[index];
+      bar.style.height = `${newValue * 2}px`;
+      bar.textContent = newValue;
+      bar.style.backgroundColor = '#7fbff5';
+    }
+
+    function updateInputFields() {
+      const op = operationSelect.value;
+      valueInput.style.display = 'none';
+      indexInput.style.display = 'none';
+
+      if (op === 'insert' || op === 'update') {
+        valueInput.style.display = 'inline-block';
+        indexInput.style.display = 'inline-block';
+      } else if (op === 'delete') {
+        indexInput.style.display = 'inline-block';
+      } else if (op === 'search') {
+        valueInput.style.display = 'inline-block';
+      }
+    }
+  </script>
+</body>
+</html>
